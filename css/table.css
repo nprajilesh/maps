@@ -1,0 +1,14 @@
+ .stop_visited 
+ {
+     color: #fff;
+     border-left: 3px bold #fff;
+     background-color: #747272;
+     border-color: #f32121;
+ }
+ 
+ .stop_remaining,.emp_list
+ {
+     color:#E73030;
+     background-color: #f7f7f7;
+     border-color: #E73030;
+ }

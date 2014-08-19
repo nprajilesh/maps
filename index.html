@@ -1,0 +1,185 @@
+
+<!DOCTYPE html>
+<html lang="en"  ng-app="details">
+  <head>
+    
+    <title>Realtime Tracking Trivandrum</title>
+     <style>
+      html, body, #map-canvas {
+        height: 99.95%;
+        margin: 0px;
+        padding: 0px
+      }
+    </style>
+
+    
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+  	<link href="css/dashboard.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <!-- Table css -->
+    <link href="css/index.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body onload="init()" ng-controller="DetailsController" >
+ 	<div class="col-md-12 header">
+ 		<button onclick="fn()" style="z-index:9999;position:absolute;left:0;" class="btn btn-primary"><i class="fa fa-bars"></i></button>
+        <h4 style="position:absolute; top:5px;left:81px;">REALTIME TRACKING SYSTEM - ERNST & YOUNG </h4>
+	</div>
+ 	<div id="map-canvas" class="col-md-12"></div>   	
+    
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 sidebar">
+          	<div class="col-md-12" style="margin-bottom:10px"><h2 style="text-align:center">TRIP TRACK</h2></div>
+          	<div class="col-md-12 sidebar-post">
+          		<div class="form-group col-md-12">
+			      <label for="inputEmail" class="col-lg-12 control-label autocomplete">Search Trip</label>
+			      <div class="col-lg-12">
+
+            <select 
+                    id="search_trip"
+                    ng-model="searchTrip" 
+                    ng-change="changeModel()" 
+                    ng-options="trip.trip_id as trip.trip_id for trip in tripData">
+            </select>
+
+			      </div>
+			    </div>
+			    <div class="form-group col-md-6">
+			      <label for="inputEmail" class="col-lg-12 control-label">From</label>
+			      <div class="col-lg-12">
+			        <input type="text" ng-model="item.source" class="form-control input-sm" id="from_stop" placeholder="From">
+			      </div>
+			    </div>
+			    <div class="form-group col-md-6">
+			      <label for="inputEmail" class="col-lg-12 control-label">To</label>
+			      <div class="col-lg-12">
+			        <input type="text" ng-model = "item.destination" class="form-control input-sm" id="to_stop" placeholder="To">
+			      </div>
+			    </div>
+			    <div class="form-group col-md-6">
+			      <label for="inputEmail" class="col-lg-12 control-label">Vehicle ID</label>
+			      <div class="col-lg-12">
+			        <input type="text" ng-model = "item.Vehicle_id" class="form-control input-sm" id="vehicle_input" placeholder="Vehicle ID">
+			      </div>
+			    </div>
+			    <div class="form-group  col-md-6">
+			      <label for="inputEmail" class="col-lg-12 control-label">Time</label>
+			      <div class="col-lg-12">
+			        <input type="text" class="form-control input-sm" id="time_input" placeholder="Time">
+			      </div>
+			    </div>
+			    <div class="form-group">
+			      <div class="col-lg-12">
+	
+			        <button  class="col-md-6 btn btn-primary btn-sm btn-search" onclick="submit_search()"><i class="fa fa-search"></i> <span>Submit</span></button>
+               <button  class="col-md-6 btn btn-primary btn-sm btn-search" ng-click="resetFn()" onclick="reset()"><i class="fa fa-search"></i> <span>Reset</span></button>
+			        <div class="col-md-3"></div>
+			      </div>
+			    </div>
+          	</div>
+            <style type="text/css">
+            .nav li a {
+              font-size: 13px;
+
+            }
+            .nav li:hover{
+              color: #008cba;
+              background: #fff;
+            }
+            </style>
+          	<ul class="nav nav-sidebar">
+	            <h5 style="margin-left:12px">ALERTS</h5>
+	            <li><a href="#">Employee Alerts  <span class="badge">11</span></a></li>
+	            <li><a href="#">Time Alerts  <span class="badge">2</span></a></li>
+	            <li><a href="#">Trip Cancelled  <span class="badge">0</span></a></li>
+          	</ul>
+            <br>
+            <div class="col-md-2"></div>
+            <button  class="col-md-8 btn btn-success btn-sm btn-search" ><i class="fa fa-search"></i> <span>Trip Sheet</span></button>
+        </div>
+       <div class="col-md-12">
+       	
+       </div>
+      </div>
+    </div>
+    <div id="hideclick" class="panel panel-info " style="margin-right:10px;width:270px;margin-top:100px">
+          <div  id="app-angular" class="panel-heading panel_head_style ">Trip Id : {{empList.trip_id}}
+          <button class="close" onclick="close_details()"><i class="fa fa-times"></i></button>
+          <br>
+          <input type="button" id="follow_btn" onclick="follow_toggle()" value="Follow">
+          <input type="button" id="show_btn"  onclick="route_toggle()" value="Show Route">
+           </div>
+             <tabset justified="true" >
+                <tab heading="Vehicle Status" class="tab_style">
+                  <table class="table tablestyle" style="table-layout:fixed;border:3px">        
+                                <thead class="thead_style">
+                                    <tr>
+                                    <th>Stop Name </th>
+                                    <th>Expected time </th>
+                                    <th>Actual Time </th>
+                                    </tr>
+                                 </thead> 
+                    </table>
+                    <div style="overflow-y:auto;height:300px">
+                      <table class="table tablestyle" style="table-layout:fixed">    
+                                  <tbody >
+                                        <tr ng-repeat ="stop in empList.stops_visited" class="stop_visited" >
+                                              <td style="text-align: left">{{stop.place}}</td>
+                                              <td>{{stop.sh_time}}</td>
+                                              <td>{{stop.arr_time}}</td>
+                                        </tr>                 
+                                        <tr ng-repeat ="stop in empList.stops_rem" class="stop_remaining">
+                                              <td style="text-align: left">{{stop.place}}</td>
+                                              <td>{{stop.sh_time}}</td>
+                                              <td>{{stop.arr_time}}</td>
+                                        </tr>
+                                  </tbody>
+                      </table>
+                    </div>
+                </tab>
+
+                <tab heading="Employees">
+                 <div style="overflow-y:auto;height:300px">
+                    <table class="table tablestyle" style="table-layout:fixed">    
+                                  <tbody >
+                                        <tr ng-repeat ="person in empList.emp" class="emp_list" >
+                                        <td style="text-align: left">{{person}}</td>
+                                  </tbody>
+                      </table>
+                 </div>
+                </tab>
+      
+            </tabset>                 
+</div>
+
+   	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+  	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  	<script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script> 
+  	<script src="http://getbootstrap.com/dist/js/bootstrap.min.js"></script>
+    
+    <!-- Map Files -->
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script src="js/map.js"></script>
+    
+    <!-- Dashboard JS -->
+    <script src="js/dashboard.js"></script>
+    
+    <!-- Angular Files -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.18/angular.min.js"></script>  
+    <script src="js/angularapp.js"></script>
+    <script type="text/javascript" src="js/ui-bootstrap-tpls-0.11.0.min.js"></script>
+    
+    <!-- Socket files -->
+    <script type="text/javascript" src="http://localhost:3000/socket.io/socket.io.js"></script>
+
+    <!-- Marker Animate  -->
+    <script type="text/javascript" src="js/markerAnimate.js"></script>
+  </body>
+</html>
