@@ -75,3 +75,38 @@ background: #fff;
 	padding: 15px;
 	margin-bottom: 4px;
 }
+
+
+#employalert1
+{
+font-size: 25px;
+font-family: tahoma;
+background-color: #2b80b9;
+padding: 5px;
+color: white;
+margin-left: 2px;
+margin-bottom: 5px;
+bottom: 5px;	
+}
+#employalert
+{
+font-size: 25px;
+font-family: tahoma;
+background-color: #2b80b9;
+padding: 15px;
+color: white;
+margin-left: 2px;
+margin-bottom: 5px;
+bottom: 5px;
+}
+.copy
+{
+	margin-top: 50px;
+}
+.alert 
+{
+
+margin-left: 5px;
+margin-top: 0px;
+margin-bottom: 3px;
+}
