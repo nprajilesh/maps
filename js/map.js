@@ -33,23 +33,27 @@ var map_style =[{"featureType":"landscape","stylers":[{"hue":"#F1FF00"},{"satura
 function init()
 {
 
-	socket = io.connect('http://localhost:3000');
-    socket.on('realtime', function (data){
-    	//	console.log(data);
-   	 		updatevehicle(data);
 
-   	 		/*Check data recived is from selected Vehicle*/
-   		 	if(data.trip_id==vehicle_id)
-   		 	{
-		  		angular.element("#hideclick").scope().updateFn(data.det);
-		  		
-		  		/*Follow Vehicle if Follow button is on*/
-		  		if(follow_vehicle==1)
-		  				follow(data.position);
+socket = io.connect('http://localhost:3000');
 
-   		 	}
+/*	socket.on('connect', function(data){
+   });
 
-    });
+   socket.on('reconnecting', function(data){
+   });
+*/
+   socket.on('realtime', function (data) {
+   	console.log(data);
+  updatevehicle(data);
+  if(data.trip_id==vehicle_id)
+  {
+  angular.element("#hideclick").scope().updateFn(data.det);
+ 	if(follow_vehicle==1)
+ 	follow(data.position);
+
+  }
+
+   });
 
     createmap();
     /*Load dashbord div on Right Top of the Map*/
@@ -160,7 +164,7 @@ function createvehicle(data,point)
  			else
  			{
 			 		/*Load static route of the vehicle while creating a new vehicle*/	
-			 		 route_data=load_route(data.det.trip_id);
+		//	 		 route_data=load_route(data.det.trip_id);
 			 		
 			 		/*Polyline 2 represent static route of the Vehicle*/
 			 		  var polyline2 = new google.maps.Polyline({
@@ -170,12 +174,16 @@ function createvehicle(data,point)
 					     strokeOpacity: 1,
 					     zIndex: 10 
 						});
-						    
+			
+//comment
+			/*			    
 			   	     for(var i in route_data.routes)
 			   	     {
 			   	       var cord = new google.maps.LatLng(route_data.routes[i].shape_pt_lat,route_data.routes[i].shape_pt_lng);
 			   	       polyline2.getPath().push(cord);
 			       	  }
+			 
+			*/
 			 }
 				
  		return {

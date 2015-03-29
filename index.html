@@ -34,7 +34,7 @@
   <body onload="init()" ng-controller="DetailsController" >
  	<div class="col-md-12 header">
  		<button onclick="fn()" style="z-index:9999;position:absolute;left:0;" class="btn btn-primary"><i class="fa fa-bars"></i></button>
-        <h4 style="position:absolute; top:5px;left:81px;">REALTIME TRACKING SYSTEM - ERNST & YOUNG </h4>
+        <h4 style="position:absolute; top:5px;left:81px;">REALTIME TRACKING SYSTEM - KSRTC </h4>
 	</div>
  	<div id="map-canvas" class="col-md-12"></div>   	
     
@@ -101,7 +101,7 @@
             </style>
           	<ul class="nav nav-sidebar">
 	            <h5 style="margin-left:12px">ALERTS</h5>
-	            <li><a href="#modal3">Employee Alerts  <span class="badge">3</span></a></li>
+	            <li><a href="#modal3">Passenger Alerts  <span class="badge">3</span></a></li>
 	            <li><a href="#modal1">Time Alerts  <span class="badge">2</span></a></li>
 	            <li><a href="#modal2">Trip Cancelled  <span class="badge">2</span></a></li>
           	</ul>
@@ -154,7 +154,7 @@
                     </div>
                 </tab>
 
-                <tab heading="Employees">
+                <tab heading="Passengers">
                  <div style="overflow-y:auto;height:300px">
                     <table class="table tablestyle" style="table-layout:fixed">    
                                   <tbody >
@@ -176,20 +176,20 @@
 <div id="modal3">
     <div class="modal-content">
       <div class="header">
-        <h2 id="employalert1">Employee Alerts</h2>
+        <h2 id="employalert1">Passenger Alerts</h2>
       </div>
       <div class="copy">
         <div class="alert alert-dismissable alert-danger">
                    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
-                    <strong>Lady Employee Travelling Alone</strong>  Emp ID : XYZ421 , Kinfra to Thampanoor , 8:00pm
+                    <strong>Lady Passenger Travelling Alone</strong>  Pass ID : XYZ421 , CET to Thampanoor , 8:00pm
              </div>
              <div class="alert alert-dismissable alert-danger">
                    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
-                   <strong>Path deveated!!!</strong> &nbsp;Vehicle ID : Kl42798 , Trip ID : EY 321 , Kinfra to Thampanoor , 8:00pm
+                   <strong>Path deveated!!!</strong> &nbsp;Vehicle ID : KL 13 2214 , Trip ID : KL 321 , pattom to CET , 8:00pm
              </div>
              <div class="alert alert-dismissable alert-warning">
                   <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
-                  <strong>Pick Cancelled!!!</strong>&nbsp; Trip ID : EY 459 , Chavadymuku to Kinfra , 10:00am
+                  <strong>Bus break down!!!</strong>&nbsp; Trip ID : CET 13 , Chavadymuku to Kollam , 10:00am
              </div>
 
         
@@ -211,11 +211,11 @@
       <div class="copy">
         <div class="alert alert-dismissable alert-success">
                    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
-                    <strong>Trip Not Started</strong>  Trip ID : EY 300 , Kinfra to Kollam , 7:00 am
+                    <strong>Trip Not Started</strong>  Trip ID : CET 300 , CET to East Fort , 7:00 am
              </div>
              <div class="alert alert-dismissable alert-success">
                    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
-                   <strong>Late for more than 30mins</strong>Trip ID : EY 321 , Kesavadasapuram to Kinfra, 9:00am
+                   <strong>Late for more than 30mins</strong>Trip ID : CET 321 , Kesavadasapuram to Kollam, 9:00am
              </div>
              
 
@@ -239,11 +239,11 @@
       <div class="copy">
         <div class="alert alert-dismissable alert-warning">
                    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
-                    <strong>Trip cancelled !!!</strong>  Trip Id : EY 1200 , Engg Collg to Kinfra , 4:00 pm
+                    <strong>Trip cancelled !!!</strong>  Trip Id : CET 1200 , CET to Kazhakootam , 4:00 pm
              </div>
              <div class="alert alert-dismissable alert-warning">
                    <button type="button" class="close" data-dismiss="alert"><i class="fa fa-times"></i></button>
-                   <strong>Trip cancelled !!!</strong>Trip ID : EY 321 , Kinfra to Thampanoor , 8:00pm
+                   <strong>Trip cancelled !!!</strong>Trip ID : CET 329 , CET to Thampanoor , 8:00pm
              </div>
              
 
