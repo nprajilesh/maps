@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Place Autocomplete</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <style>
+      html, body, #map-canvas {
+        height: 100%;
+        margin: 0px;
+        padding: 0px
+      }
+
+      th,td{
+        margin-top: 16px;
+        border:1px solid transparent;
+        border-collapse:collapse;
+        background-color: #fff;
+        outline: none;
+        height: 25px;
+      }
+
+      tr{
+        border:1px solid black;
+        border-collapse:collapse;
+      }
+
+      table
+      {
+        margin-top: 16px;
+        border:1px solid transparent;
+        border-collapse:collapse;
+        /*border-radius: 2px 0 0 2px;*/
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+        background-color: #fff;
+        outline: none;
+        height: 25px;
+      }
+
+      .controls {
+        margin-top: 16px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+      #pac-input {
+        background-color: #fff;
+        padding: 0 11px 0 13px;
+        width: 400px;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        text-overflow: ellipsis;
+      }
+
+      #pac-input:focus {
+        border-color: #4d90fe;
+        margin-left: -1px;
+        padding-left: 14px;  /* Regular padding-left + 1. */
+        width: 401px;
+      }
+
+      .pac-container {
+        font-family: Roboto;
+      }
+
+      #type-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+      }
+
+      #type-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+}
+
+    </style>
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries==geometry,places&sensor=false"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.0/jquery-ui.js"></script>
+    <script type="text/javascript" src="index.js"></script>
+
+    </head>
+  <body>
+    <div id="input" style="left:10px">
+      <form id="form" style="padding:10px">
+      
+      <input id="source" class="controls" type="text" placeholder="Enter a source" size="45" onclick="search(this)" onfocus="search(this)">
+  
+      <button id="waypoint_button" type="button" class="controls" onclick="addwaypoint(this)">Add Waypoint</button><br>
+      <input id="destination" class="controls" type="text" placeholder="Enter a destination" size="45" onclick="search(this)" onfocus=" search(this)">
+      <button type="button" class="controls" onclick="getdirections()">Create Route</button><br>
+      
+      <input id="stops" class="controls" placeholder="Add stops" value="" size="45" type="text">
+      <br>
+      <button type="button" id="load_button" class="controls" onclick="load_route()" >Load</button><br>
+<!--       <br><button type="button" class="controls" onclick="loadroute()">Load Route</button>
+ -->      </form>
+      <form id="stop_details" style="padding:10px;visibility:hidden">
+        <input id="stop_time" class="controls" type="text" placeholder="Arrival time-HH:MM" size="20">
+        <button type="button" class="controls" onclick="gettime()">Submit</button><br> 
+        <button type="button" id="reset_button" class="controls" onclick="reset_route()" style="visibility:hidden">Reset</button><br>
+      </form>
+    </div>
+    <div id="map-canvas"></div>
+    <div id="directions-panel"></div>
+  </body>
+</html>
